@@ -6,5 +6,5 @@ from .models import BookingList
 class BookingListSerializer(serializers.ModelSerializer):
 
     class Meta:
-        fields = '__all__'
+        fields = ('workplace', 'datetime_from', 'datetime_to', 'author')
         model = BookingList
