@@ -12,10 +12,10 @@ class Workplace(models.Model):
         return str(self.cabinet_number)
 
 
-class Booking(models.Model):
+class BookingList(models.Model):
     workplace = models.ForeignKey(Workplace, on_delete=models.CASCADE)
     datetime_from = models.DateTimeField()
     datetime_to = models.DateTimeField()
 
     def __str__(self):
-        return self.workplace
+        return str(self.workplace.cabinet_number)
