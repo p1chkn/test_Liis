@@ -15,7 +15,7 @@ services:
       - ./.env
   web:
     build: .
-    command: gunicorn foodgram.wsgi:application --bind 0.0.0.0:8000 
+    command: gunicorn test_Liis.wsgi:application --bind 0.0.0.0:8000 
     restart: always
     volumes: 
       - static_volume:/code/static
