@@ -15,7 +15,7 @@ def workplace(request):
 
     data = Workplace.objects.all()
     serializer = WorkplaceSerializer(data, many=True)
-    return JsonResponse(serializer.data)
+    return JsonResponse(serializer.data, safe=False)
 
 
 class BookingListViewSet(viewsets.ModelViewSet):
