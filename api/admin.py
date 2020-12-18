@@ -5,7 +5,7 @@ from .models import BookingList, Workplace
 
 class WorkplaceAdmin(admin.ModelAdmin):
 
-    list_display = ('pk','cabinet_number', 'description')
+    list_display = ('pk', 'cabinet_number', 'description')
     list_filter = ('cabinet_number', )
 
 
