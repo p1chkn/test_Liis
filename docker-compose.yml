@@ -3,7 +3,6 @@ version: '3.7'
 volumes:
   postgres_data:
   static_volume:
-  media_volume:
 
 services:
   db:
@@ -20,7 +19,6 @@ services:
     restart: always
     volumes: 
       - static_volume:/code/static
-      - media_volume:/code/media
     depends_on:
       - db
     env_file:
@@ -29,7 +27,6 @@ services:
     build: ./nginx
     volumes:
       - static_volume:/code/static
-      - media_volume:/code/media
     ports:
       - 80:80
     depends_on:
