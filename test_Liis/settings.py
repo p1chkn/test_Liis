@@ -29,6 +29,7 @@ DEBUG = os.environ.get('DEBUG') == 'True'
 
 ALLOWED_HOSTS = [
     '*',
+    'p1chkn-liis.ga',
 ]
 
 
