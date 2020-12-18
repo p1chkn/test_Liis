@@ -10,7 +10,7 @@ class Workplace(models.Model):
     description = models.TextField(blank=True)
 
     def __str__(self):
-        return str(self.cabinet_number)
+        return str(self.id)
 
 
 class BookingList(models.Model):
@@ -21,4 +21,4 @@ class BookingList(models.Model):
     datetime_to = models.DateTimeField()
 
     def __str__(self):
-        return str(self.workplace.cabinet_number)
+        return str(self.workplace.id)
