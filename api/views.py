@@ -1,16 +1,26 @@
+from django.http import JsonResponse
 from django.shortcuts import get_list_or_404
 from rest_framework import viewsets
+from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
 from .filters import BookingListFilter
-from .models import BookingList
+from .models import BookingList, Workplace
 from .permissions import IsOwnerOrReadOnly
-from .serializers import BookingListSerializer
+from .serializers import BookingListSerializer, WorkplaceSerializer
+
+
+@api_view(['GET'])
+def workplace(request):
+
+    data = Workplace.objects.all()
+    serializer = WorkplaceSerializer(data, many=True)
+    return JsonResponse(serializer.data)
 
 
 class BookingListViewSet(viewsets.ModelViewSet):
 
-    queryset = BookingList.objects.all()
+    queryset = BookingList.objects.select_related('workplace', 'author').all()
     serializer_class = BookingListSerializer
     permission_classes = [IsOwnerOrReadOnly]
     filter_class = BookingListFilter

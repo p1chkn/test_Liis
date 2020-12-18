@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from .models import BookingList
+from .models import BookingList, Workplace
 
 
 class BookingListSerializer(serializers.ModelSerializer):
@@ -45,3 +45,11 @@ class BookingListSerializer(serializers.ModelSerializer):
                             'This date is booked already!')
 
         return attrs
+
+
+class WorkplaceSerializer(serializers.ModelSerializer):
+
+    class Meta:
+
+        fields = '__all__'
+        model = Workplace
