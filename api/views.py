@@ -1,8 +1,7 @@
 from django.http import JsonResponse
-from django.shortcuts import get_list_or_404
+from django.shortcuts import get_object_or_404
 from rest_framework import viewsets
 from rest_framework.decorators import api_view
-from rest_framework.response import Response
 
 from .filters import BookingListFilter
 from .models import BookingList, Workplace
@@ -18,6 +17,15 @@ def workplace(request):
     return JsonResponse(serializer.data, safe=False)
 
 
+@api_view(['GET'])
+def workplace_bookinglist(request, workplace_id):
+
+    workplace = get_object_or_404(Workplace, id=workplace_id)
+    data = BookingList.objects.filter(workplace=workplace).all()
+    serializer = BookingListSerializer(data, many=True)
+    return JsonResponse(serializer.data, safe=False)
+
+
 class BookingListViewSet(viewsets.ModelViewSet):
 
     queryset = BookingList.objects.select_related('workplace', 'author').all()
@@ -27,8 +35,3 @@ class BookingListViewSet(viewsets.ModelViewSet):
 
     def perform_create(self, serializer):
         serializer.save(author=self.request.user)
-
-    def retrieve(self, request, pk=None):
-        queryset = get_list_or_404(BookingList, workplace=pk)
-        serializer = self.serializer_class(queryset, many=True)
-        return Response(serializer.data)
